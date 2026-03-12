@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Postagem</title>
+    <link rel="stylesheet" href="./assets/style/index.css">
+</head>
+<body>
+    <div class="container">
+    <div id="navbar" class="navbar"></div>
+    <div id="content" class="content">
+        <h1 id="post-title"></h1>
+        <small id="post-date"></small>
+        <hr>
+        <p id="post-content"></p>
+
+        <br>
+        <a href="index.html">
+            <button>Voltar</button>
+        </a>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+    const id = Number(params.get("id"));
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    const post = posts.find(p => p.id === id);
+
+    if (!post) {
+        document.body.innerHTML = "<h2>Postagem não encontrada.</h2>";
+        return;
+    }
+
+    document.getElementById("post-title").innerText = post.title;
+    document.getElementById("post-date").innerText = post.date;
+    document.getElementById("post-content").innerText = post.content;
+
+});
+</script>
+
+</body>
+</html>
