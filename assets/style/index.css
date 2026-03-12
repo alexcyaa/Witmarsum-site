@@ -32,10 +32,65 @@ img{
     border-radius: 8px;
 }
 
-.navbar img{
+.footer{
+    background-color: rgb(40, 160, 48);
+    width: 100%;
+    max-width: 1000px;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.footer img{
     width: 25px;
     height: 25px;
     background-color: white;
+}
+
+.footer-about{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.footer-about p{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+    transition: all 0.2 ease;
+}
+
+.footer-about a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+    transition: all 0.2 ease;
+}
+
+.footer-about a:hover{
+    background-color:green;
+    transform: translateX(4px);
+    border: 5px;
+    border-radius: 8px;
+    transition: all 0.2 ease;
+}
+
+.footer-suport{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.footer-suport p{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+    transition: all 0.2 ease;
 }
 
 .navbar a {
