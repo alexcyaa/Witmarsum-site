@@ -1,11 +1,32 @@
-document.addEventListener("DOMContentLoaded", loadPosts);
+document.addEventListener("DOMContentLoaded", () => {
+    loadPosts();
+    const imageInput = document.getElementById("post-image");
+    if (imageInput) {
+        imageInput.addEventListener("change", function() {
+            const preview = document.getElementById("image-preview");
+            if (!preview) return;
+            preview.innerHTML = "";
+            const file = this.files[0];
+            if (file && file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const img = document.createElement("img");
+                    img.src = reader.result;
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
 
 function addPost() {
     const title = document.getElementById("title").value;
     const content = document.getElementById("contentt").value;
+    const imageInput = document.getElementById("post-image");
 
     if (!title || !content) {
-        alert("Preencha todos os campos.");
+        alert("Preencha título e conteúdo.");
         return;
     }
 
@@ -13,16 +34,40 @@ function addPost() {
         id: Date.now(),
         title: title,
         content: content,
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString(),
+        image: null
     };
 
+    const file = imageInput && imageInput.files[0];
+    if (file) {
+        if (file.size > 2 * 1024 * 1024) {
+            alert("A imagem deve ter no máximo 2MB.");
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function() {
+            post.image = reader.result;
+            savePost(post);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        savePost(post);
+    }
+}
+
+function savePost(post) {
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
     posts.push(post);
-
     localStorage.setItem("posts", JSON.stringify(posts));
 
     document.getElementById("title").value = "";
-    document.getElementById("content").value = "";
+    document.getElementById("contentt").value = "";
+    const imageInput = document.getElementById("post-image");
+    if (imageInput) {
+        imageInput.value = "";
+        const preview = document.getElementById("image-preview");
+        if (preview) preview.innerHTML = "";
+    }
 
     if (document.getElementById("posts-container")) {
         loadPosts();
@@ -48,7 +93,12 @@ function loadPosts() {
         const postElement = document.createElement("div");
         postElement.classList.add("post");
 
+        const imageHtml = post.image
+            ? `<img src="${post.image}" alt="${post.title}" class="post-thumbnail">`
+            : "";
+
         postElement.innerHTML = `
+            ${imageHtml}
             <h3>${post.title}</h3>
             <small>${post.date}</small>
             <div class="post-buttons">
