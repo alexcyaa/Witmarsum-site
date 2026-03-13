@@ -14,6 +14,7 @@
             <h1 id="post-title"></h1>
             <small id="post-date"></small>
             <hr>
+            <div id="post-image-container"></div>
             <p id="post-content"></p>
             <br>
             <a href="index.html" class="btn">← Voltar ao início</a>
@@ -36,6 +37,11 @@
             document.getElementById("post-title").innerText = post.title;
             document.getElementById("post-date").innerText = post.date;
             document.getElementById("post-content").innerText = post.content;
+
+            const imgContainer = document.getElementById("post-image-container");
+            if (post.image && imgContainer) {
+                imgContainer.innerHTML = `<img src="${post.image}" alt="${post.title}" class="post-detail-image">`;
+            }
         });
     </script>
 </body>
