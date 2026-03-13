@@ -271,6 +271,16 @@ img {
     flex-wrap: wrap;
 }
 
+.post-buttons a {
+    background: none !important;
+    padding: 0 !important;
+}
+
+.post-buttons a:hover {
+    background: none !important;
+    box-shadow: none !important;
+}
+
 .allposts button, .btn {
     display: inline-flex;
     align-items: center;
@@ -287,11 +297,11 @@ img {
     transition: var(--transition);
     box-shadow: 0 2px 12px rgba(45, 106, 79, 0.3);
     font-family: inherit;
+    color: white;
 }
 
 .allposts button:hover, .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
 }
 
 .allposts button:active, .btn:active {
