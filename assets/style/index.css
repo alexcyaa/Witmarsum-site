@@ -365,6 +365,20 @@ img {
     margin-bottom: 4px;
 }
 
+.footer-developers li {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+ }
+
+ .footer-developers {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+ }
+
 .footer-about a, .footer-suport a {
     color: var(--cream);
     text-decoration: none;
